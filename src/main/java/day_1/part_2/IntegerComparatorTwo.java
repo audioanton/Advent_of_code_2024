@@ -1,4 +1,4 @@
-package day_1;
+package day_1.part_2;
 
 
 import java.util.ArrayList;
@@ -6,14 +6,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class IntegerComparator {
+public class IntegerComparatorTwo {
     int leftColumn;
     int rightColumn;
     int result;
     List<Integer> leftColumnList;
     List<Integer> rightColumnList;
 
-    public IntegerComparator() {
+    public IntegerComparatorTwo() {
         leftColumn = 0;
         rightColumn = 0;
         result = 0;
@@ -22,6 +22,7 @@ public class IntegerComparator {
     }
 
     public int getSumOfDifferenceInString(String s) {
+
         try (Scanner scanner = new Scanner(s)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -48,5 +49,22 @@ public class IntegerComparator {
         int max = Math.max(firstInt, secondInt);
         int min = Math.min(firstInt, secondInt);
         return max - min;
+    }
+
+    public int getSumOcurrences(int i) {
+        int result = 0;
+        for (Integer integer : rightColumnList) {
+            if (integer == i)
+                result++;
+        }
+        return result;
+    }
+
+    public int calculateLikenessScore() {
+        int result = 0;
+        for (int i = 0; i < leftColumnList.size(); i++) {
+            result += (leftColumnList.get(i) * getSumOcurrences(leftColumnList.get(i)));
+        }
+        return result;
     }
 }
