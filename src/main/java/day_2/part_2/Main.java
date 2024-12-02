@@ -1,0 +1,30 @@
+package day_2.part_2;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ReportCheckerTwo checker = new ReportCheckerTwo();
+
+        try (Scanner scanner = new Scanner(new FileReader("src/main/java/day_2/puzzleInput.txt"))) {
+            int result = 0;
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                List<Integer> row = checker.createListPerRow(line);
+                if (checker.checkRow(row))
+                    result++;
+                else if (checker.problemDampenerCheck(row))
+                    result++;
+            }
+
+            System.out.println(result);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
