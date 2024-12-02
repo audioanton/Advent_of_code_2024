@@ -7,15 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class IntegerComparatorTwo {
-    int leftColumn;
-    int rightColumn;
     int result;
     List<Integer> leftColumnList;
     List<Integer> rightColumnList;
 
     public IntegerComparatorTwo() {
-        leftColumn = 0;
-        rightColumn = 0;
         result = 0;
         leftColumnList = new ArrayList<>();
         rightColumnList = new ArrayList<>();
