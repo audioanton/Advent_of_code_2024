@@ -1,10 +1,8 @@
-package day_3;
+package day_3.part_1;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 

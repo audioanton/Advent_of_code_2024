@@ -1,8 +1,7 @@
-package day_3;
+package day_3.part_1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
