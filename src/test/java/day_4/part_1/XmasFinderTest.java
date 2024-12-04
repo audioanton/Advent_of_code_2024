@@ -47,7 +47,7 @@ class XmasFinderTest {
     }
 
     @Test
-    void getSumXmasDiagonalRightDirection() {
+    void getSumXmasDiagonalBothDirections() {
         assertEquals(5, xf.getSumXmasDiagonalRightDirection(testList));
     }
 
