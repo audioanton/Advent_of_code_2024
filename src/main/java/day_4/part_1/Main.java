@@ -1,6 +1,5 @@
 package day_4.part_1;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
