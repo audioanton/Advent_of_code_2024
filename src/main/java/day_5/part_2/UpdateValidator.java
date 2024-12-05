@@ -4,14 +4,67 @@ import java.util.*;
 
 public class UpdateValidator {
 
-    public List<String> sortUpdate(List<String> incorrectUpdate, List<String> rules) {
+    //hitta alla matchningar
+    //byta plats säkert
+    //hitta alla matchningar
+
+    public List<String> sortUpdateThree(List<String> incorrectUpdate, List<String> rules) {
+        StringBuilder builder = new StringBuilder();
+
+        for (String s : incorrectUpdate) {
+            builder.append(s);
+        }
+
+        //söka igenom i while-loop efter matchningar i stringbuildern
+        //sedan ändra om
+        int res;
+        incorrectUpdate.stream().anyMatch(s -> builder.toString().contains(s));
+        return incorrectUpdate;
+    }
+
+    public List<String> sortUpdateNew(List<String> incorrectUpdate, List<String> rules) {
+        List<String> temp = new ArrayList<>();
+        List<String> sortedUpdate = incorrectUpdate;
+
+        System.out.println(incorrectUpdate);
+
+        for (int i = 0; i < incorrectUpdate.size()-1; i+=2) {
+            temp.add(incorrectUpdate.get(i)+incorrectUpdate.get(i+1));
+        }
+
+        while (!validateUpdate(sortedUpdate, rules)) {
+            List<Integer> matches = new ArrayList<>();
+            for (String s : temp) {
+                int index = Collections.binarySearch(rules, s);
+                if (index >= 0)
+                    matches.add(temp.indexOf(s));
+            }
+
+            for (Integer i : matches) {
+                String wrong = temp.get(i);
+                incorrectUpdate.set(i, wrong.substring(2) + wrong.substring(0, 2));
+            }
+
+            sortedUpdate.clear();
+
+            for (String s : temp) {
+                sortedUpdate.add(s.substring(0,2));
+                sortedUpdate.add(s.substring(3));
+            }
+        }
+        System.out.println(sortedUpdate);
+
+        return sortedUpdate;
+    }
+
+    public List<String> sortUpdateOld(List<String> incorrectUpdate, List<String> rules) {
         System.out.println(incorrectUpdate);
         List<String> sortedUpdate = incorrectUpdate;
 
         for (int i = 0; i < incorrectUpdate.size()-1; i++) {
             int steps = 1;
             while (!validateUpdate(sortedUpdate, rules)) {
-                if (i + steps > incorrectUpdate.size())
+                if (i + steps > incorrectUpdate.size()-1)
                     steps = -1;
 
                 //oändlig loop
@@ -23,6 +76,7 @@ public class UpdateValidator {
                     sortedUpdate.set(i, second);
                     sortedUpdate.set(i + steps, first);
                 }
+                steps++;
             }
         }
         System.out.println("\n");
@@ -78,6 +132,18 @@ public class UpdateValidator {
     public int getMiddlePageNumber(List<String> update) {
         int index = update.size() / 2;
         return Integer.parseInt(update.get(index));
+    }
+
+    public int getSumAllSortedUpdates(List<List<String>> updates, List<String> rules) {
+        int sum = 0;
+
+        for (List<String> update : updates) {
+            if (!validateUpdate(update, rules)) {
+                List<String> sortedUpdate = sortUpdateNew(update, rules);
+                sum += getMiddlePageNumber(sortedUpdate);
+            }
+        }
+        return sum;
     }
 
     public int getSumAllValidUpdates(List<List<String>> updates, List<String> rules) {

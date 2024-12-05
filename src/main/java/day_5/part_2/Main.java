@@ -20,7 +20,7 @@ public class Main {
             List<String> rules = updateValidator.getListOfAllRules(sb.toString());
             List<List<String>> updates = updateValidator.getListOfAllUpdates(sb.toString());
 
-            System.out.println(updateValidator.getSumAllValidUpdates(updates, rules));
+            System.out.println(updateValidator.getSumAllSortedUpdates(updates, rules));
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
